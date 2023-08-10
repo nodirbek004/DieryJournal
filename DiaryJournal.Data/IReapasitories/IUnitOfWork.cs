@@ -1,5 +1,5 @@
 ﻿using DiaryJournal.Domain.Entitys.DiaryJournal;
-using DiaryJournal.Domain.Entitys.User;
+using DiaryJournal.Domain.Entitys.Users;
 
 namespace DiaryJournal.Data.IReapasitories;
 

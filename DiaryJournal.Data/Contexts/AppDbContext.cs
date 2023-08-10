@@ -1,6 +1,6 @@
 ﻿
 using DiaryJournal.Domain.Entitys.DiaryJournal;
-using DiaryJournal.Domain.Entitys.User;
+using DiaryJournal.Domain.Entitys.Users;
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal;
 
