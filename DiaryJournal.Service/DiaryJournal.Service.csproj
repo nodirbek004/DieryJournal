@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Journal\" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <ProjectReference Include="..\DiaryJournal.Data\DiaryJournal.Data.csproj" />
+    <ProjectReference Include="..\DiaryJournal.Domain\DiaryJournal.Domain.csproj" />
   </ItemGroup>
 
 </Project>
