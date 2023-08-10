@@ -8,4 +8,5 @@ public interface IUnitOfWork:IDisposable
     IRepasitory<User> UserRepasitory { get; }
     IRepasitory<Journal> JournalRepasitory { get; }
     Task SaveAsync();
+
 }
