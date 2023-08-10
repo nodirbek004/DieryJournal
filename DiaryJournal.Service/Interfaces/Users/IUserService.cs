@@ -12,5 +12,5 @@ public interface IUserService
     Task<Responce<UserResulDTO>> GetByNumberAsync (string number);
 
     Task<Responce<IEnumerable<UserResulDTO>>> GetAllAssync();
-    Task<Responce<UserResulDTO>> GetByNumberAsync(long id);
+
 }

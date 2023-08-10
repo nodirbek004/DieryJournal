@@ -1,10 +1,12 @@
 ﻿using DiaryJournal.Data.Contexts;
-using DiaryJournal.Data.IReapasitories;
+using DiaryJournal.Data.IReapasitories.Commons;
 using DiaryJournal.Domain.Commons;
+using DiaryJournal.Domain.Entitys.DiaryJournal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using System.Linq.Expressions;
 
-namespace DiaryJournal.Data.Repasitories;
+namespace DiaryJournal.Data.Repasitories.Commons;
 
 public class Repasitory<T> : IRepasitory<T> where T : AudiTable
 {
@@ -15,25 +17,24 @@ public class Repasitory<T> : IRepasitory<T> where T : AudiTable
     }
     public async Task CreateAsync(T entity)
     {
-        entity.CreateAt = DateTime.Now;
-        await this.dbContext.Set<T>().AddAsync(entity);
+        entity.CreateAt = DateTime.UtcNow;
+        await dbContext.Set<T>().AddAsync(entity);
     }
 
     public void Delete(T entity)
     {
-        this.dbContext.Set<T>().Remove(entity);
+        dbContext.Set<T>().Remove(entity);
     }
 
     public IQueryable<T> SelectAll()
-        =>this.dbContext.Set<T>().AsNoTracking().AsQueryable();
-    
+        => dbContext.Set<T>().AsQueryable();
 
-    public async Task<T> SelectByIdAsync(long id)
-        => await this.dbContext.Set<T>().FirstOrDefaultAsync(x=> x.Id == id);
+    public Task<T> SelectAsync(Expression<Func<T, bool>> expression)
+        => dbContext.Set<T>().FirstOrDefaultAsync(expression);
 
     public void Update(T entity)
     {
         entity.UpdateAt = DateTime.Now;
-        this.dbContext.Entry(entity).State = EntityState.Modified;
+        dbContext.Entry(entity).State = EntityState.Modified;
     }
 }

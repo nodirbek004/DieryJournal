@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DiaryJournal.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230810103321_initailcreate")]
+    [Migration("20230810174039_initailcreate")]
     partial class initailcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,10 @@ namespace DiaryJournal.Data.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("text");
@@ -52,7 +56,7 @@ namespace DiaryJournal.Data.Migrations
                     b.ToTable("Journal");
                 });
 
-            modelBuilder.Entity("DiaryJournal.Domain.Entitys.User.User", b =>
+            modelBuilder.Entity("DiaryJournal.Domain.Entitys.Users.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,7 +97,18 @@ namespace DiaryJournal.Data.Migrations
 
             modelBuilder.Entity("DiaryJournal.Domain.Entitys.DiaryJournal.Journal", b =>
                 {
-                    b.HasOne("DiaryJournal.Domain.Entitys.User.User", "User")
+                    b.HasOne("DiaryJournal.Domain.Entitys.Users.User", "User")
+                        .WithMany("Journals")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DiaryJournal.Domain.Entitys.Users.User", b =>
+                {
+                    b.HasOne("DiaryJournal.Domain.Entitys.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -102,15 +117,9 @@ namespace DiaryJournal.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DiaryJournal.Domain.Entitys.User.User", b =>
+            modelBuilder.Entity("DiaryJournal.Domain.Entitys.Users.User", b =>
                 {
-                    b.HasOne("DiaryJournal.Domain.Entitys.User.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.Navigation("Journals");
                 });
 #pragma warning restore 612, 618
         }

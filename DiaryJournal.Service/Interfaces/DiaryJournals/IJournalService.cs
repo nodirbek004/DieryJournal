@@ -1,13 +1,15 @@
-﻿using DiaryJournal.Service.DTOs.DierJournals;
+﻿using DiaryJournal.Data.Repasitories.Commons;
+using DiaryJournal.Service.DTOs.DierJournals;
+using DiaryJournal.Service.Helpers;
 
 namespace DiaryJournal.Service.Interfaces.DiaryJournals;
 
 public interface IJournalService
 {
-    Task<JournalResultDTO> CreateAsync(JournalCreationDTO dto);
-    Task<JournalResultDTO> UpdateAsync(JournalUpdateDTO dto);
-    Task<bool> DeleteAsync(long id);
-    Task<JournalResultDTO> GetByNameAsync(long id);
-    Task<IEnumerable<JournalResultDTO>> GetAllAsync();
+    Task<Responce<JournalResultDTO>> CreateAsync(JournalCreationDTO dto);
+    Task<Responce<JournalResultDTO>> UpdateAsync(JournalUpdateDTO dto);
+    Task<Responce<bool>> DeleteAsync(long id);
+    Task<Responce<JournalResultDTO>> GetByNameAsync(string name);
+    Responce<IEnumerable<JournalResultDTO>> GetAllAsync();
 
 }

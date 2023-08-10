@@ -15,12 +15,12 @@ public class AppDbContext:DbContext
     }
     public DbSet<User> User { get; set; }
     public DbSet<Journal> Journal { get; set; }
-    protected override void OnModelCreating(ModelBuilder modelBuilder) 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         #region FluntApi
         modelBuilder.Entity<Journal>()
         .HasOne(c => c.User)
-        .WithMany()
+        .WithMany(p => p.Journals)
         .HasForeignKey(c => c.UserId);
         #endregion
     }

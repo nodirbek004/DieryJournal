@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DiaryJournal.Service.Helpers;
 
-namespace DiaryJournal.Service.Helpers
+public class Responce<T>
 {
-    internal class Responce
-    {
-    }
+    public long StatusCode { get; set; }
+    public string Message { get; set; }
+    public T Data { get; set; }
 }

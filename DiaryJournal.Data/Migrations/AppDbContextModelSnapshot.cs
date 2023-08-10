@@ -54,7 +54,7 @@ namespace DiaryJournal.Data.Migrations
                     b.ToTable("Journal");
                 });
 
-            modelBuilder.Entity("DiaryJournal.Domain.Entitys.User.User", b =>
+            modelBuilder.Entity("DiaryJournal.Domain.Entitys.Users.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,20 +83,15 @@ namespace DiaryJournal.Data.Migrations
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("User");
                 });
 
             modelBuilder.Entity("DiaryJournal.Domain.Entitys.DiaryJournal.Journal", b =>
                 {
-                    b.HasOne("DiaryJournal.Domain.Entitys.User.User", "User")
-                        .WithMany()
+                    b.HasOne("DiaryJournal.Domain.Entitys.Users.User", "User")
+                        .WithMany("Journals")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -104,15 +99,9 @@ namespace DiaryJournal.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DiaryJournal.Domain.Entitys.User.User", b =>
+            modelBuilder.Entity("DiaryJournal.Domain.Entitys.Users.User", b =>
                 {
-                    b.HasOne("DiaryJournal.Domain.Entitys.User.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.Navigation("Journals");
                 });
 #pragma warning restore 612, 618
         }

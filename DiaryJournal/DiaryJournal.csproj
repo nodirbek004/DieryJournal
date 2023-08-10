@@ -20,6 +20,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DiaryJournal.Data\DiaryJournal.Data.csproj" />
+    <ProjectReference Include="..\DiaryJournal.Domain\DiaryJournal.Domain.csproj" />
+    <ProjectReference Include="..\DiaryJournal.Service\DiaryJournal.Service.csproj" />
+    <ProjectReference Include="..\DiaryJournal.Wiew\DiaryJournal.Wiew.csproj" />
   </ItemGroup>
 
 </Project>
