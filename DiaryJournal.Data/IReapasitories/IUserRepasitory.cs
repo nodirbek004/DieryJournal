@@ -1,6 +1,10 @@
-﻿namespace DiaryJournal.Data.IReapasitories;
+﻿using DiaryJournal.Data.IReapasitories.Commons;
+using DiaryJournal.Domain.Entitys.Users;
 
-public interface IUserRepasitory
+namespace DiaryJournal.Data.IReapasitories;
+
+public interface IUserRepasitory: IRepasitory<User>
 {
+    Task<User> GetByNumberAsync(string number);
 
 }

@@ -1,4 +1,5 @@
 ﻿using DiaryJournal.Data.Contexts;
+using DiaryJournal.Data.IReapasitories;
 using DiaryJournal.Data.IReapasitories.Commons;
 using DiaryJournal.Domain.Entitys.DiaryJournal;
 using DiaryJournal.Domain.Entitys.Users;
@@ -9,20 +10,25 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext dbContext;
 
-    public IRepasitory<User> UserRepasitory { get; }
+    public UnitOfWork(AppDbContext app)
+    {
+        dbContext = new AppDbContext();
+        UserRepasitory = new UserRepasitory(dbContext);
+        JournalRepasitory = new Repasitory<Journal>(dbContext);
+    }
+    public IUserRepasitory UserRepasitory { get; }
     public IRepasitory<Journal> JournalRepasitory { get; }
 
 
-    public UnitOfWork(AppDbContext appDbContext)
-    {
-        dbContext = appDbContext;
-        UserRepasitory = new Repasitory<User>(dbContext);
-        JournalRepasitory = new Repasitory<Journal>(dbContext);
-    }
 
     public void Dispose()
     {
         GC.SuppressFinalize(true);
+    }
+
+    public async Task SaveAsync()
+    {
+        dbContext.SaveChangesAsync();
     }
 
     //public async Task SaveAsync()
@@ -30,5 +36,5 @@ public class UnitOfWork : IUnitOfWork
     //    var i = await dbContext.SaveChangesAsync();
     //    Console.WriteLine(i);
     //}
-    
+
 }

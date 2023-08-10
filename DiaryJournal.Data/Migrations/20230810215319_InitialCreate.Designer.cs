@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DiaryJournal.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230810174039_initailcreate")]
-    partial class initailcreate
+    [Migration("20230810215319_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace DiaryJournal.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Journal");
+                    b.ToTable("Journals");
                 });
 
             modelBuilder.Entity("DiaryJournal.Domain.Entitys.Users.User", b =>
@@ -85,31 +85,15 @@ namespace DiaryJournal.Data.Migrations
                     b.Property<DateTime>("UpdateAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("DiaryJournal.Domain.Entitys.DiaryJournal.Journal", b =>
                 {
                     b.HasOne("DiaryJournal.Domain.Entitys.Users.User", "User")
                         .WithMany("Journals")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("DiaryJournal.Domain.Entitys.Users.User", b =>
-                {
-                    b.HasOne("DiaryJournal.Domain.Entitys.Users.User", "User")
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

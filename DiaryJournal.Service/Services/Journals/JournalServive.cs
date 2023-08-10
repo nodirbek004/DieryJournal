@@ -26,7 +26,7 @@ public class JournalServive : IJournalService
     }
     public async Task<Responce<JournalResultDTO>> CreateAsync(JournalCreationDTO dto)
     {
-        var existJournal = await unitOfWork.JournalRepasitory.SelectAsync(x => x.Name.Equals(dto.Name));
+        var existJournal = (await unitOfWork.JournalRepasitory.SelectAsync(x => x.Name.Equals(dto.Name)));
         if (existJournal is not null)
             return new Responce<JournalResultDTO>
             {
@@ -36,7 +36,7 @@ public class JournalServive : IJournalService
             };
         var mappedJournal = mapper.Map<Journal>(dto);
         await unitOfWork.JournalRepasitory.CreateAsync(mappedJournal);
-        var temp = await dbContext.SaveChangesAsync();
+        var temp = dbContext.SaveChangesAsync();
         //var temp = unitOfWork.SaveAsync();
         var result=mapper.Map<JournalResultDTO>(mappedJournal);
 

@@ -51,7 +51,7 @@ namespace DiaryJournal.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Journal");
+                    b.ToTable("Journals");
                 });
 
             modelBuilder.Entity("DiaryJournal.Domain.Entitys.Users.User", b =>
@@ -85,7 +85,7 @@ namespace DiaryJournal.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("DiaryJournal.Domain.Entitys.DiaryJournal.Journal", b =>

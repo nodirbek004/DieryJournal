@@ -6,12 +6,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DiaryJournal.Data.Migrations
 {
-    public partial class initailcreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -21,22 +21,15 @@ namespace DiaryJournal.Data.Migrations
                     DateOfBirth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: false)
+                    UpdateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_User_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Journal",
+                name: "Journals",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -49,33 +42,28 @@ namespace DiaryJournal.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Journal", x => x.Id);
+                    table.PrimaryKey("PK_Journals", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Journal_User_UserId",
+                        name: "FK_Journals_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Journal_UserId",
-                table: "Journal",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_User_UserId",
-                table: "User",
+                name: "IX_Journals_UserId",
+                table: "Journals",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Journal");
+                name: "Journals");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

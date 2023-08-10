@@ -1,12 +1,13 @@
-﻿using DiaryJournal.Domain.Entitys.DiaryJournal;
+﻿using DiaryJournal.Data.IReapasitories.Commons;
+using DiaryJournal.Domain.Entitys.DiaryJournal;
 using DiaryJournal.Domain.Entitys.Users;
 
-namespace DiaryJournal.Data.IReapasitories.Commons;
+namespace DiaryJournal.Data.IReapasitories;
 
-public interface IUnitOfWork : IDisposable
+public interface IUnitOfWork:IDisposable
 {
-    IRepasitory<User> UserRepasitory { get; }
+    IUserRepasitory UserRepasitory { get; }
     IRepasitory<Journal> JournalRepasitory { get; }
-    //Task SaveAsync();
+
 
 }

@@ -17,6 +17,7 @@ public class MappingProfile:Profile
         CreateMap<Journal, JournalCreationDTO>().ReverseMap();
         CreateMap<JournalUpdateDTO, Journal>().ReverseMap();
         CreateMap<JournalResultDTO, Journal>().ReverseMap();
+        CreateMap<JournalResultDTO, JournalCreationDTO>().ReverseMap();
     }
 
 }

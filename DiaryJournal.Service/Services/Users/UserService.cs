@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using DiaryJournal.Data.Contexts;
-using DiaryJournal.Data.IReapasitories.Commons;
-using DiaryJournal.Data.Repasitories;
+using DiaryJournal.Data.IReapasitories;
 using DiaryJournal.Data.Repasitories.Commons;
 using DiaryJournal.Domain.Entitys.Users;
 using DiaryJournal.Service.DTOs.Users;
 using DiaryJournal.Service.Helpers;
 using DiaryJournal.Service.Interfaces.Users;
 using DiaryJournal.Service.Mappers;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiaryJournal.Service.Services.Users;
 
@@ -19,20 +17,21 @@ public class UserService : IUserService
     private readonly AppDbContext dbContext;
     public UserService()
     {
+
         this.dbContext = new AppDbContext();
         this.unitOfWork = new UnitOfWork(dbContext);
-        this.mapper=new Mapper(new MapperConfiguration(x=>x.AddProfile<MappingProfile>()));
+        this.mapper = new Mapper(new MapperConfiguration(x => x.AddProfile<MappingProfile>()));
     }
     public async Task<Responce<UserResulDTO>> CreateAsync(UserCreationDTO dto)
     {
-        var existUser = await unitOfWork.UserRepasitory.SelectAsync(t => t.PhoneNumber.Equals(dto.PhoneNumber));
+        var existUser = unitOfWork.UserRepasitory.SelectAll().FirstOrDefault(p => p.PhoneNumber.Equals(dto.PhoneNumber));
         if (existUser is not null)
             return new Responce<UserResulDTO>
             {
                 StatusCode = 403,
                 Message = "this User not Found"
             };
-        var mappedUser=mapper.Map<User>(dto);
+        var mappedUser = mapper.Map<User>(dto);
         await unitOfWork.UserRepasitory.CreateAsync(mappedUser);
         var test = await dbContext.SaveChangesAsync();
         var result = mapper.Map<UserResulDTO>(mappedUser);
@@ -40,14 +39,14 @@ public class UserService : IUserService
         {
             StatusCode = 200,
             Message = "succesfull",
-            Data= result
+            Data = result
         };
 
     }
 
     public async Task<Responce<bool>> DeleteAsync(long id)
     {
-        var existUser= await unitOfWork.UserRepasitory.SelectAsync(x=>x.Id.Equals(id));
+        var existUser = await unitOfWork.UserRepasitory.SelectAsync(x => x.Id.Equals(id));
         if (existUser is null)
             return new Responce<bool>
             {
@@ -56,6 +55,7 @@ public class UserService : IUserService
                 Data = false
             };
         unitOfWork.UserRepasitory.Delete(existUser);
+        var temp = await dbContext.SaveChangesAsync();
         //await unitOfWork.SaveAsync();
         return new Responce<bool>
         {
@@ -70,7 +70,7 @@ public class UserService : IUserService
     {
         var users = unitOfWork.UserRepasitory.SelectAll();
         List<UserResulDTO> result = new List<UserResulDTO>();
-        foreach( var user in users)
+        foreach (var user in users)
         {
             result.Add(mapper.Map<UserResulDTO>(user));
         }
@@ -85,21 +85,22 @@ public class UserService : IUserService
 
 
 
-    public async Task<Responce<UserResulDTO>> GetByNumberAsync(string number)
+    public async Task<Responce<bool>> GetByNumberAsync(string number)
     {
-        var existUser=unitOfWork.UserRepasitory.SelectAsync(x=>x.PhoneNumber.Equals(number));
+        var existUser = unitOfWork.UserRepasitory.GetByNumberAsync(number);
         if (existUser is null)
-            return new Responce<UserResulDTO>
+            return new Responce<bool>
             {
-                StatusCode=404,
-                Message="This User not found"
+                StatusCode = 404,
+                Message = "This User not found",
+                Data = false
             };
-        var result =mapper.Map<UserResulDTO>(existUser);
-        return new Responce<UserResulDTO>
+        var result = mapper.Map<UserResulDTO>(existUser);
+        return new Responce<bool>
         {
             StatusCode = 200,
             Message = "succesfull",
-            Data = result
+            Data = true
         };
 
     }
@@ -108,16 +109,17 @@ public class UserService : IUserService
 
     public async Task<Responce<UserResulDTO>> UpdateAsync(UserUpdateDTO dto)
     {
-        User existuser = await this.unitOfWork.UserRepasitory.SelectAsync(x=>x.PhoneNumber.Equals(dto.PhoneNumber));
-        if (existuser is  null)
+        User existuser = await this.unitOfWork.UserRepasitory.SelectAsync(x => x.PhoneNumber.Equals(dto.PhoneNumber));
+        if (existuser is null)
             return new Responce<UserResulDTO>
             {
                 StatusCode = 403,
                 Message = "Not Found"
 
             };
-        mapper.Map(dto, existuser); 
+        mapper.Map(dto, existuser);
         unitOfWork.UserRepasitory.Update(existuser);
+        var temp = await dbContext.SaveChangesAsync();
         //await unitOfWork.SaveAsync();
 
         var result = mapper.Map<UserResulDTO>(existuser);

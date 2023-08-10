@@ -11,30 +11,30 @@ namespace DiaryJournal.Data.Repasitories.Commons;
 public class Repasitory<T> : IRepasitory<T> where T : AudiTable
 {
     private readonly AppDbContext dbContext;
+    private readonly DbSet<T> dbSet;
     public Repasitory(AppDbContext dbContext)
     {
         this.dbContext = dbContext;
+        dbSet = dbContext.Set<T>();
     }
-    public async Task CreateAsync(T entity)
+    public async Task<T> CreateAsync(T entity)
     {
-        entity.CreateAt = DateTime.UtcNow;
-        await dbContext.Set<T>().AddAsync(entity);
+        var temp = (await dbSet.AddAsync(entity)).Entity;
+        return temp;
     }
 
     public void Delete(T entity)
     {
-        dbContext.Set<T>().Remove(entity);
+        dbSet.Remove(entity);
     }
 
     public IQueryable<T> SelectAll()
-        => dbContext.Set<T>().AsQueryable();
+        => dbSet.AsQueryable();
 
     public Task<T> SelectAsync(Expression<Func<T, bool>> expression)
         => dbContext.Set<T>().FirstOrDefaultAsync(expression);
 
-    public void Update(T entity)
-    {
-        entity.UpdateAt = DateTime.Now;
-        dbContext.Entry(entity).State = EntityState.Modified;
-    }
+    public T Update(T entity)
+        =>dbSet.Update(entity).Entity;
+
 }

@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DiaryJournal.Wiew.DiaryJournalWindow;
 
-namespace DiaryJournal.Wiew.DiaryJournalWindow
+public class FirstWindow
 {
-    internal class FirstWindow
+    public FirstWindow()
     {
+        Console.WriteLine(@$"
+                  -------ASSALOMU ALEYKUM-------
+                  QAYSI BOLIMDAN FOYDALANMOQCHISIZ!
+                           1.KIRISH
+                           2.RO'YXATDAN UTISH
+
+");
+        int a=int.Parse(Console.ReadLine());
+        switch (a)
+        {
+            case 1:
+                break;
+            case 2:
+                LogIn logIn = new LogIn();
+                logIn.Login();
+                break;
+        }
     }
 }

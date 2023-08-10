@@ -7,8 +7,8 @@ namespace DiaryJournal.Data.IReapasitories.Commons;
 
 public interface IRepasitory<T> where T : AudiTable
 {
-    Task CreateAsync(T entity);
-    void Update(T entity);
+    Task<T> CreateAsync(T entity);
+    T Update(T entity);
     void Delete(T entity);
     Task<T> SelectAsync(Expression<Func<T, bool>> expression);
     IQueryable<T> SelectAll();
