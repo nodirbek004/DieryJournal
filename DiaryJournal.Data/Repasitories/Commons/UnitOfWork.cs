@@ -9,8 +9,7 @@ namespace DiaryJournal.Data.Repasitories.Commons;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly AppDbContext dbContext;
-
-    public UnitOfWork(AppDbContext app)
+    public UnitOfWork()
     {
         dbContext = new AppDbContext();
         UserRepasitory = new UserRepasitory(dbContext);

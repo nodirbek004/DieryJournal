@@ -13,14 +13,12 @@ namespace DiaryJournal.Service.Services.Journals;
 
 public class JournalServive : IJournalService
 {
-    private AppDbContext dbContext;
     private UnitOfWork unitOfWork;
-    private readonly Mapper mapper;
+    private readonly IMapper mapper;
 
     public JournalServive()
     {
-        dbContext = new AppDbContext();
-        this.unitOfWork = new UnitOfWork(dbContext);
+        this.unitOfWork = new UnitOfWork();
         this.mapper = new Mapper(new MapperConfiguration(x => x.AddProfile<MappingProfile>()));
         
     }
@@ -36,8 +34,6 @@ public class JournalServive : IJournalService
             };
         var mappedJournal = mapper.Map<Journal>(dto);
         await unitOfWork.JournalRepasitory.CreateAsync(mappedJournal);
-        var temp = dbContext.SaveChangesAsync();
-        //var temp = unitOfWork.SaveAsync();
         var result=mapper.Map<JournalResultDTO>(mappedJournal);
 
         return new Responce<JournalResultDTO>
@@ -61,8 +57,6 @@ public class JournalServive : IJournalService
             };
         
          unitOfWork.JournalRepasitory.Delete(existJournal);
-        var temp = await dbContext.SaveChangesAsync();
-         //await unitOfWork.SaveAsync();
 
         return new Responce<bool>
         {
@@ -113,8 +107,6 @@ public class JournalServive : IJournalService
             };
         mapper.Map(dto, exsistJournal);
         unitOfWork.JournalRepasitory.Update(exsistJournal);
-        var temp = await dbContext.SaveChangesAsync();
-        //await unitOfWork.SaveAsync();
 
         var result =mapper.Map<JournalResultDTO>(exsistJournal);
         return new Responce<JournalResultDTO> { StatusCode = 200,Message = "OK", Data=result};

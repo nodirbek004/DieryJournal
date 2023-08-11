@@ -14,12 +14,9 @@ public class UserService : IUserService
 {
     private readonly IMapper mapper;
     private readonly IUnitOfWork unitOfWork;
-    private readonly AppDbContext dbContext;
     public UserService()
     {
-
-        this.dbContext = new AppDbContext();
-        this.unitOfWork = new UnitOfWork(dbContext);
+        this.unitOfWork = new UnitOfWork();
         this.mapper = new Mapper(new MapperConfiguration(x => x.AddProfile<MappingProfile>()));
     }
     public async Task<Responce<UserResulDTO>> CreateAsync(UserCreationDTO dto)
@@ -32,8 +29,9 @@ public class UserService : IUserService
         //        Message = "this User not Found"
         //    };
         var mappedUser = mapper.Map<User>(dto);
+        
         await unitOfWork.UserRepasitory.CreateAsync(mappedUser);
-        this.unitOfWork.UserRepasitory.SaveChangesAsync();
+
         var result = mapper.Map<UserResulDTO>(mappedUser);
         return new Responce<UserResulDTO>
         {
@@ -55,8 +53,6 @@ public class UserService : IUserService
                 Data = false
             };
         unitOfWork.UserRepasitory.Delete(existUser);
-        var temp = await dbContext.SaveChangesAsync();
-        //await unitOfWork.SaveAsync();
         return new Responce<bool>
         {
             StatusCode = 200,
@@ -119,7 +115,6 @@ public class UserService : IUserService
             };
         mapper.Map(dto, existuser);
         unitOfWork.UserRepasitory.Update(existuser);
-        var temp = await dbContext.SaveChangesAsync();
         //await unitOfWork.SaveAsync();
 
         var result = mapper.Map<UserResulDTO>(existuser);

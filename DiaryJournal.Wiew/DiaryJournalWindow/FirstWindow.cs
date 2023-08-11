@@ -17,7 +17,8 @@ public class FirstWindow
             case 1:
                 break;
             case 2:
-
+                LogIn logIn = new LogIn();
+                logIn.Login();
                 break;
         }
     }

@@ -11,11 +11,9 @@ namespace DiaryJournal.Data.Repasitories.Commons;
 public class Repasitory<T> : IRepasitory<T> where T : AudiTable
 {
     private readonly AppDbContext dbContext;
-    private readonly DbSet<T> dbSet;
     public Repasitory(AppDbContext dbContext)
     {
         this.dbContext = dbContext;
-        dbSet = dbContext.Set<T>();
     }
     public async Task CreateAsync(T entity)
     {
