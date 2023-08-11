@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DiaryJournal.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230810215319_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230811005827_InitialCreate769")]
+    partial class InitialCreate769
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,6 +35,9 @@ namespace DiaryJournal.Data.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -44,6 +47,9 @@ namespace DiaryJournal.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<long>("UserId")
@@ -67,6 +73,9 @@ namespace DiaryJournal.Data.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("timestamp with time zone");
 
@@ -83,6 +92,9 @@ namespace DiaryJournal.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");

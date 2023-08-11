@@ -1,12 +1,4 @@
-﻿using DiaryJournal.Data.Contexts;
-using DiaryJournal.Domain.Entitys.Users;
-using DiaryJournal.Service.DTOs.DierJournals;
-using DiaryJournal.Service.DTOs.Users;
-using DiaryJournal.Service.Services.Journals;
-using DiaryJournal.Service.Services.Users;
-using DiaryJournal.Wiew.DiaryJournalWindow;
-
-//UserService userService = new UserService();
+﻿//UserService userService = new UserService();
 
 //UserUpdateDTO userUpdateDto = new UserUpdateDTO()
 //{
@@ -15,9 +7,10 @@ using DiaryJournal.Wiew.DiaryJournalWindow;
 //    DateOfBirth = DateTimeOffset.Parse(DateTime.Parse("2004-02-20").ToString()).UtcDateTime,
 //    PhoneNumber = "+998881813525"
 //};
-FirstWindow firstWindow = new FirstWindow();   
-//await userService.UpdateAsync(userUpdateDto);
+using DiaryJournal.Wiew.DiaryJournalWindow;
 
+FirstWindow firstWindow = new FirstWindow();
+//await userService.UpdateAsync(userUpdateDto);
 
 
 //JournalCreationDTO journalCreationDTO = new JournalCreationDTO()

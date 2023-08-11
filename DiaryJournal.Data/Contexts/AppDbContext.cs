@@ -10,18 +10,10 @@ public class AppDbContext:DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        string stringConnection = "Host=localhost;Port=5432;User Id=postgres; Database=DiaryJournal; Password=2004;";
+        string stringConnection = "Host=localhost;Port=5432;User Id=postgres; Database=JournalDiary; Password=2004;";
         optionsBuilder.UseNpgsql(stringConnection);
     }
     public DbSet<User> Users { get; set; }
     public DbSet<Journal> Journals { get; set; }
-    //protected override void OnModelCreating(ModelBuilder modelBuilder)
-    //{
-    //    #region FluntApi
-    //    modelBuilder.Entity<Journal>()
-    //    .HasOne(c => c.User)
-    //    .WithMany(p => p.Journals)
-    //    .HasForeignKey(c => c.UserId);
-    //    #endregion
-    //}
+
 }

@@ -17,24 +17,33 @@ public class Repasitory<T> : IRepasitory<T> where T : AudiTable
         this.dbContext = dbContext;
         dbSet = dbContext.Set<T>();
     }
-    public async Task<T> CreateAsync(T entity)
+    public async Task CreateAsync(T entity)
     {
-        var temp = (await dbSet.AddAsync(entity)).Entity;
-        return temp;
+        entity.CreatedAt = DateTime.UtcNow;
+        await this.dbContext.Set<T>().AddAsync(entity);
+        await dbContext.SaveChangesAsync();
     }
 
-    public void Delete(T entity)
+    public  void Delete(T entity)
     {
-        dbSet.Remove(entity);
+         this.dbContext.Set<T>().Remove(entity);
+    }
+
+    public async void SaveChangesAsync()
+    {
+        await dbContext.SaveChangesAsync();
     }
 
     public IQueryable<T> SelectAll()
-        => dbSet.AsQueryable();
+        => this.dbContext.Set<T>().AsQueryable();
 
-    public Task<T> SelectAsync(Expression<Func<T, bool>> expression)
-        => dbContext.Set<T>().FirstOrDefaultAsync(expression);
+    public async Task<T> SelectAsync(Expression<Func<T, bool>> expression)
+        => await dbContext.Set<T>().FirstOrDefaultAsync(expression);
 
-    public T Update(T entity)
-        =>dbSet.Update(entity).Entity;
+    public void Update(T entity)
+    {
+        entity.UpdatedAt = DateTime.UtcNow;
+        this.dbContext.Entry(entity).State = EntityState.Modified;
+    }
 
 }

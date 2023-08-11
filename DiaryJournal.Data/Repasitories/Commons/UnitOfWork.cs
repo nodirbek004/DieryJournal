@@ -26,15 +26,8 @@ public class UnitOfWork : IUnitOfWork
         GC.SuppressFinalize(true);
     }
 
-    public async Task SaveAsync()
-    {
-        dbContext.SaveChangesAsync();
-    }
 
-    //public async Task SaveAsync()
-    //{
-    //    var i = await dbContext.SaveChangesAsync();
-    //    Console.WriteLine(i);
-    //}
+
+
 
 }

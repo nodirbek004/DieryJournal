@@ -49,9 +49,9 @@ public class JournalServive : IJournalService
            
     }
 
-    public async Task<Responce<bool>> DeleteAsync(long id)
+    public async Task<Responce<bool>> DeleteAsync(string name)
     {
-        var existJournal = await unitOfWork.JournalRepasitory.SelectAsync(x => x.Id.Equals(id));
+        var existJournal = await unitOfWork.JournalRepasitory.SelectAsync(x => x.Id.Equals(name));
         if (existJournal is null)
             return new Responce<bool>
             {

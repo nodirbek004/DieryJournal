@@ -3,15 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryJournal", "DiaryJournal\DiaryJournal.csproj", "{5A997372-4F31-4560-9340-9C2462E67E30}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryJournal.Data", "DiaryJournal.Data\DiaryJournal.Data.csproj", "{5C6A2463-1985-4708-8597-2B981D2DA263}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryJournal.Domain", "DiaryJournal.Domain\DiaryJournal.Domain.csproj", "{18BD6114-76C0-4EA0-A95A-B767474C916A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryJournal.Service", "DiaryJournal.Service\DiaryJournal.Service.csproj", "{7F1A208C-AA44-4346-921F-1502C73EFCBF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryJournal.Wiew", "DiaryJournal.Wiew\DiaryJournal.Wiew.csproj", "{D9ED6509-1395-4D17-A22C-0A73167981BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiaryJournal", "DiaryJournal\DiaryJournal.csproj", "{51AE7FA5-ADB4-4038-8F87-C30E6ADE16CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,31 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5A997372-4F31-4560-9340-9C2462E67E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A997372-4F31-4560-9340-9C2462E67E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A997372-4F31-4560-9340-9C2462E67E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A997372-4F31-4560-9340-9C2462E67E30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5C6A2463-1985-4708-8597-2B981D2DA263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C6A2463-1985-4708-8597-2B981D2DA263}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C6A2463-1985-4708-8597-2B981D2DA263}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C6A2463-1985-4708-8597-2B981D2DA263}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18BD6114-76C0-4EA0-A95A-B767474C916A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18BD6114-76C0-4EA0-A95A-B767474C916A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18BD6114-76C0-4EA0-A95A-B767474C916A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18BD6114-76C0-4EA0-A95A-B767474C916A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F1A208C-AA44-4346-921F-1502C73EFCBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F1A208C-AA44-4346-921F-1502C73EFCBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F1A208C-AA44-4346-921F-1502C73EFCBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F1A208C-AA44-4346-921F-1502C73EFCBF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9ED6509-1395-4D17-A22C-0A73167981BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9ED6509-1395-4D17-A22C-0A73167981BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9ED6509-1395-4D17-A22C-0A73167981BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9ED6509-1395-4D17-A22C-0A73167981BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51AE7FA5-ADB4-4038-8F87-C30E6ADE16CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51AE7FA5-ADB4-4038-8F87-C30E6ADE16CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51AE7FA5-ADB4-4038-8F87-C30E6ADE16CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51AE7FA5-ADB4-4038-8F87-C30E6ADE16CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {2CD2E28D-697B-4854-A22C-9DB80F6CA514}
+		SolutionGuid = {1F986BCE-98EA-49EB-A18B-A6922FAEFF77}
 	EndGlobalSection
 EndGlobal

@@ -9,5 +9,4 @@ public interface IUnitOfWork:IDisposable
     IUserRepasitory UserRepasitory { get; }
     IRepasitory<Journal> JournalRepasitory { get; }
 
-
 }

@@ -8,17 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DiaryJournal.Data\DiaryJournal.Data.csproj" />
     <ProjectReference Include="..\DiaryJournal.Domain\DiaryJournal.Domain.csproj" />
     <ProjectReference Include="..\DiaryJournal.Service\DiaryJournal.Service.csproj" />

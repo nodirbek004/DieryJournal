@@ -24,16 +24,16 @@ public class UserService : IUserService
     }
     public async Task<Responce<UserResulDTO>> CreateAsync(UserCreationDTO dto)
     {
-        var existUser = unitOfWork.UserRepasitory.SelectAll().FirstOrDefault(p => p.PhoneNumber.Equals(dto.PhoneNumber));
-        if (existUser is not null)
-            return new Responce<UserResulDTO>
-            {
-                StatusCode = 403,
-                Message = "this User not Found"
-            };
+        //var existUser = unitOfWork.UserRepasitory.SelectAll().FirstOrDefault(p => p.PhoneNumber.Equals(dto.PhoneNumber));
+        //if (existUser is not null)
+        //    return new Responce<UserResulDTO>
+        //    {
+        //        StatusCode = 403,
+        //        Message = "this User not Found"
+        //    };
         var mappedUser = mapper.Map<User>(dto);
         await unitOfWork.UserRepasitory.CreateAsync(mappedUser);
-        var test = await dbContext.SaveChangesAsync();
+        this.unitOfWork.UserRepasitory.SaveChangesAsync();
         var result = mapper.Map<UserResulDTO>(mappedUser);
         return new Responce<UserResulDTO>
         {
@@ -87,7 +87,7 @@ public class UserService : IUserService
 
     public async Task<Responce<bool>> GetByNumberAsync(string number)
     {
-        var existUser = unitOfWork.UserRepasitory.GetByNumberAsync(number);
+        var existUser = await unitOfWork.UserRepasitory.GetByNumberAsync(number);
         if (existUser is null)
             return new Responce<bool>
             {
